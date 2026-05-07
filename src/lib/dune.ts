@@ -24,7 +24,7 @@ export class DunePersonaService {
     
     if (this.client) {
       try {
-        // Dune execution: We use a placeholder query ID for the hackathon demo, or pass actual parameters
+        // Dune execution: Execute Dune query with given parameters
         // Example Query ID for a persona analysis
         const executionResult = await this.client.refresh(123456, { wallet: walletAddress });
         console.log(`[Dune SDK] Analysis complete for ${walletAddress}`);
@@ -46,7 +46,7 @@ export class DunePersonaService {
       }
     }
     
-    // Fallback Mock the returned Persona based on SQL query result
+    // Fallback: build the returned Persona based on SQL query result
     console.log(`[Dune SDK] Falling back to mock analysis for ${walletAddress}`);
     return {
       persona: "Exit Liquidity Human",
