@@ -31,7 +31,16 @@ Spotify Wrapped for crypto wallets. 5 Dune SQL signals → AI persona → sharea
 ## 🏗️ Architecture & Tech Stack
 We built the frontend using **Next.js 16** and **Tailwind CSS v4**.
 
-*(Check the architecture directory for detailed system diagrams)*
+```mermaid
+graph TD
+    A[User Wallet] -->|Input| B(Next.js App Router)
+    B -->|Execute SQL| C{Dune API}
+    C -->|Return 5 Signals| D[Behavioral Analysis]
+    D -->|Signals| E{AI Persona Generator}
+    E -->|Archetype & Roast| F[Shareable Card UI]
+    F -->|Export| G[Social Media]
+```
+
 See the [Architecture Document](docs/ARCHITECTURE.md) and [Product Requirements Document](docs/PRD.md) for full system specifications.
 
 ## 🏆 Sponsor Tracks Targeted
