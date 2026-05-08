@@ -18,7 +18,7 @@ export class DunePersonaService {
     this.initialized = true;
   }
 
-  async generatePersona(walletAddress: string): Promise<any> {
+  async generatePersona(walletAddress: string): Promise<{ persona: string, signals: Record<string, string> }> {
     this.init();
 
     console.log(`[Dune API] Analyzing wallet ${walletAddress}...`);

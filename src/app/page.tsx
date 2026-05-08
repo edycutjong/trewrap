@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import { PersonaCard } from '@/components/PersonaCard';
-import { duneService } from '@/lib/dune';
 
 export default function Home() {
   const [wallet, setWallet] = useState('');
   const [loading, setLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [_resultData, setResultData] = useState<unknown>(null);
 
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,7 +15,19 @@ export default function Home() {
     
     setLoading(true);
     
-    await duneService.generatePersona(wallet);
+    try {
+      const res = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ walletAddress: wallet })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setResultData(data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
     
     setLoading(false);
     setShowResult(true);
@@ -29,7 +41,7 @@ export default function Home() {
           <div>
             <h1 className="text-6xl font-black text-white mb-4 tracking-tighter">
               Discover your <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">on-chain</span> <br/>
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-500">on-chain</span> <br/>
               persona.
             </h1>
             <p className="text-slate-400 text-lg">
@@ -87,7 +99,7 @@ export default function Home() {
               </div>
             </div>
           ) : (
-            <div className="w-full max-w-sm aspect-[4/5] bg-slate-900/50 border-2 border-slate-800 border-dashed rounded-3xl flex flex-col items-center justify-center text-slate-600 p-8 text-center">
+            <div className="w-full max-w-sm aspect-4/5 bg-slate-900/50 border-2 border-slate-800 border-dashed rounded-3xl flex flex-col items-center justify-center text-slate-600 p-8 text-center">
               <span className="text-4xl mb-4">👀</span>
               <p>Enter your wallet address to reveal your true on-chain identity.</p>
             </div>
