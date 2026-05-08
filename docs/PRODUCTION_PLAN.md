@@ -14,7 +14,7 @@ Vercel frontend, Supabase cache, Dune API
 - Demo flow works end-to-end
 
 ## Pre-Submission Checklist
-- [ ] Core SDK features working
-- [ ] Demo video recorded (< 3 min)
-- [ ] bench.py latency results included
-- [ ] README with architecture diagram
+- [x] Core SDK features working
+- [x] Demo video recorded (< 3 min)
+- [x] bench.py latency results included
+- [x] README with architecture diagram
