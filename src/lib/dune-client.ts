@@ -1,3 +1,12 @@
+export interface BehavioralSignals {
+  tradingVolume: string;
+  avgHoldingTime: string;
+  favoriteDex: string;
+  winRate: string;
+  topTradedToken: string;
+  totalPnl: string;
+}
+
 export class DuneClient {
   private apiKey: string;
   private baseUrl = "https://api.dune.com/api/v1";
@@ -6,7 +15,7 @@ export class DuneClient {
     this.apiKey = process.env.DUNE_API_KEY || process.env.NEXT_PUBLIC_DUNE_API_KEY || "";
   }
 
-  async fetchBehavioralSignals(walletAddress: string) {
+  async fetchBehavioralSignals(walletAddress: string): Promise<BehavioralSignals> {
     console.log(`[DuneClient] Fetching signals for ${walletAddress}...`);
 
     if (this.apiKey) {

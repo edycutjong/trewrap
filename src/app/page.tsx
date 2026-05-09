@@ -7,6 +7,7 @@ export default function Home() {
   const [wallet, setWallet] = useState('');
   const [loading, setLoading] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_resultData, setResultData] = useState<unknown>(null);
 
   const handleGenerate = async (e: React.FormEvent) => {

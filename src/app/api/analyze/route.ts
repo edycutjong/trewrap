@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     }
 
     const signals = await duneClient.fetchBehavioralSignals(walletAddress);
-    const personaData = aiPersonaGenerator.generate(signals);
+    const personaData = aiPersonaGenerator.generate(signals as unknown as Record<string, string | number>);
 
     return NextResponse.json({
       persona: personaData.persona,
