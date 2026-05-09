@@ -13,6 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://trewrap.edycu.dev"),
   title: "Trewrap | Dune Persona",
   description: "Your on-chain personality wrapped.",
   icons: {
@@ -45,6 +46,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} dark antialiased`}
       style={{ colorScheme: "dark" }}
+      suppressHydrationWarning
     >
       <body className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">{children}</body>
     </html>
