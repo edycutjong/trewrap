@@ -4,23 +4,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trewrap Pitch Deck</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Reveal.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/monokai.min.css">
 
     <style>
+      body {
+        background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #000000 100%);
+      }
+      .reveal {
+        font-family: 'Inter', sans-serif;
+      }
       .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
         text-transform: none;
-        font-family: 'Inter', system-ui, sans-serif;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
         font-weight: 700;
         letter-spacing: -0.02em;
       }
       .reveal .brand-text {
-        background: linear-gradient(90deg, #a855f7, #06b6d4);
+        background: linear-gradient(90deg, #a855f7, #06b6d4, #a855f7);
+        background-size: 200% auto;
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 800;
+        animation: shimmer 4s linear infinite;
+      }
+      @keyframes shimmer {
+        to { background-position: 200% center; }
       }
       .reveal .subtext {
         color: #94a3b8;
@@ -28,7 +47,7 @@
         margin-top: -10px;
       }
       .reveal .slide-background {
-        background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #000000 100%);
+        background: transparent !important;
       }
       .reveal ul {
         display: block;
@@ -51,108 +70,254 @@
         align-items: center;
       }
       .metric-box {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 30px;
+        border-radius: 16px;
+        padding: 40px 30px;
         text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+      }
+      .metric-box:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px -10px rgba(6, 182, 212, 0.3);
+        border-color: rgba(6, 182, 212, 0.5);
+        background: rgba(255, 255, 255, 0.05);
       }
       .metric-value {
-        font-size: 2.5em;
-        font-weight: bold;
-        color: #06b6d4;
+        font-size: 3.5em;
+        font-weight: 800;
+        font-family: 'Space Grotesk', sans-serif;
+        background: linear-gradient(135deg, #fff, #94a3b8);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
         margin: 0;
+        line-height: 1;
       }
       .metric-label {
         font-size: 0.5em;
         color: #94a3b8;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-top: 10px;
+        letter-spacing: 3px;
+        margin-top: 15px;
+        font-weight: 600;
+      }
+      .glow-button {
+        display: inline-block;
+        padding: 15px 40px;
+        background: linear-gradient(90deg, #a855f7, #06b6d4);
+        color: white !important;
+        text-decoration: none !important;
+        border-radius: 30px;
+        font-weight: 600;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.8em;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px -10px rgba(168, 85, 247, 0.5);
+      }
+      .glow-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px -10px rgba(6, 182, 212, 0.8);
+        color: white !important;
+      }
+      .links-container {
+        margin-top: 50px;
+        text-align: left;
+        width: 80%;
+        margin: 50px auto;
+        background: rgba(255,255,255,0.02);
+        padding: 40px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+      }
+      .links-container:hover {
+        border-color: rgba(168, 85, 247, 0.3);
+      }
+      
+      /* Particle container */
+      #tsparticles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
       }
     </style>
   </head>
   <body>
+    <!-- Particles Background -->
+    <div id="tsparticles"></div>
+
     <div class="reveal">
       <div class="slides">
         
         <!-- Slide 1: Title -->
-        <section>
-          <h1 class="brand-text">Trewrap</h1>
-          <p>Spotify Wrapped for crypto wallets. 5 Dune SQL signals → AI persona → shareable card.</p>
-          <div style="margin-top: 50px;">
-            <small style="color: #64748b; letter-spacing: 2px; text-transform: uppercase;">Colosseum Frontier Hackathon 2026</small>
+        <section data-auto-animate>
+          <h1 class="brand-text" data-id="title">Trewrap</h1>
+          <p data-id="subtitle" style="font-size: 1.1em; color: #e2e8f0; font-weight: 500;">Spotify Wrapped for crypto wallets. <br/> <span style="color: #06b6d4;">5 Dune SQL signals → AI persona → shareable card.</span></p>
+          <div style="margin-top: 60px; opacity: 0.8;">
+            <small style="color: #94a3b8; letter-spacing: 3px; text-transform: uppercase; font-size: 0.4em; font-weight: 600;">Colosseum Frontier Hackathon 2026</small>
           </div>
         </section>
 
         <!-- Slide 2: The Problem -->
-        <section>
-          <h2>The <span style="color: #ef4444;">Problem</span></h2>
-          <p style="font-size: 1.2em; line-height: 1.4; color: #cbd5e1;">Current solutions lack speed, security, and integration.</p>
-          <ul>
-            <li>Fragmentation across chains and services</li>
-            <li>Poor user experience for web3 adoption</li>
-            <li>Lack of actionable insights</li>
+        <section data-auto-animate>
+          <h2 data-id="title">The <span style="color: #ef4444;">Problem</span></h2>
+          <p style="font-size: 1.2em; line-height: 1.4; color: #cbd5e1; font-weight: 500;">Current solutions lack speed, security, and integration.</p>
+          <ul style="margin-top: 40px;">
+            <li class="fragment fade-up">Fragmentation across chains and services</li>
+            <li class="fragment fade-up">Poor user experience for web3 adoption</li>
+            <li class="fragment fade-up">Lack of actionable, readable insights</li>
           </ul>
         </section>
 
         <!-- Slide 3: The Solution -->
-        <section>
-          <h2>The <span class="brand-text">Solution</span></h2>
-          <p><strong>Trewrap</strong> bridges the gap.</p>
-          <div class="grid-2" style="margin-top: 40px;">
-            <div class="metric-box">
-              <div style="font-size: 3em;">⚡</div>
-              <h3 style="margin-top: 20px; font-size: 1.2em;">Fast Execution</h3>
-              <p style="font-size: 0.6em; color: #94a3b8;">High performance integrations</p>
+        <section data-auto-animate>
+          <h2 data-id="title">The <span class="brand-text">Solution</span></h2>
+          <p style="font-size: 1.2em;"><strong>Trewrap</strong> bridges the gap.</p>
+          <div class="grid-2" style="margin-top: 60px;">
+            <div class="metric-box fragment fade-right">
+              <div style="font-size: 4em; line-height: 1; margin-bottom: 20px;">⚡</div>
+              <h3 style="font-size: 1.3em; margin: 0;">Fast Execution</h3>
+              <p style="font-size: 0.6em; color: #94a3b8; margin-top: 10px;">High performance Dune integrations</p>
             </div>
-            <div class="metric-box">
-              <div style="font-size: 3em;">🔒</div>
-              <h3 style="margin-top: 20px; font-size: 1.2em;">Secure by Design</h3>
-              <p style="font-size: 0.6em; color: #94a3b8;">Verifiable actions and robustness</p>
+            <div class="metric-box fragment fade-left">
+              <div style="font-size: 4em; line-height: 1; margin-bottom: 20px;">🔒</div>
+              <h3 style="font-size: 1.3em; margin: 0;">Secure by Design</h3>
+              <p style="font-size: 0.6em; color: #94a3b8; margin-top: 10px;">Verifiable actions and robustness</p>
             </div>
           </div>
         </section>
 
         <!-- Slide 4: Engineering Quality -->
-        <section>
-          <h2>Production Ready</h2>
-          <div class="grid-2" style="margin-top: 40px;">
+        <section data-auto-animate>
+          <h2 data-id="title">Production Ready</h2>
+          <div class="grid-2" style="margin-top: 60px;">
             <div class="metric-box">
-              <p class="metric-value">100%</p>
+              <p class="metric-value">100<span style="font-size: 0.6em; color: #94a3b8;">%</span></p>
               <p class="metric-label">Test Coverage</p>
             </div>
             <div class="metric-box">
-              <p class="metric-value">Zero</p>
+              <p class="metric-value">0</p>
               <p class="metric-label">Lint Warnings</p>
             </div>
           </div>
-          <p style="font-size: 0.6em; color: #94a3b8; margin-top: 40px;">
-            Built with Next.js 16 App Router, React 19, Tailwind CSS v4, and Vitest. Fully automated CI pipeline.
+          <p style="font-size: 0.6em; color: #94a3b8; margin-top: 50px; opacity: 0.8;">
+            Built with Next.js 16 App Router, React 19, Tailwind CSS v4, and Vitest.<br/>Fully automated CI pipeline.
           </p>
         </section>
 
         <!-- Slide 5: Demo / Links -->
-        <section>
-          <h2>Experience <span class="brand-text">Trewrap</span></h2>
-          <div style="margin-top: 40px; text-align: left; width: 60%; margin: 40px auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-            <p style="margin: 10px 0;"><strong style="color: #22d3ee;">Live Demo:</strong> <a href="https://trewrap.vercel.app" target="_blank" style="color: #fff;">trewrap.vercel.app</a></p>
-            <p style="margin: 10px 0;"><strong style="color: #22d3ee;">GitHub:</strong> <a href="https://github.com/edycutjong/frontier-dune" target="_blank" style="color: #fff;">edycutjong/frontier-dune</a></p>
+        <section data-auto-animate>
+          <h2 data-id="title">Experience <span class="brand-text">Trewrap</span></h2>
+          
+          <div class="links-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <strong style="color: #a855f7; font-size: 1.2em; font-family: 'Space Grotesk';">Live Demo</strong>
+              <a href="https://trewrap.edycu.dev" target="_blank" class="glow-button">Launch App</a>
+            </div>
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 30px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <strong style="color: #06b6d4; font-size: 1.2em; font-family: 'Space Grotesk';">Open Source</strong>
+              <a href="https://github.com/edycutjong/trewrap" target="_blank" style="color: #e2e8f0; font-family: monospace; font-size: 0.9em; text-decoration: none;">github.com/edycutjong/trewrap</a>
+            </div>
           </div>
-          <p style="font-size: 0.7em; color: #94a3b8; margin-top: 40px;">Thank you for your time.</p>
+
+          <p style="font-size: 0.6em; color: #64748b; margin-top: 60px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">Thank you for your time</p>
         </section>
 
       </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+    <!-- tsParticles -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine@2.12.0/tsparticles.engine.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-basic@2.12.0/tsparticles.basic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-interaction-particles-links@2.12.0/tsparticles.interaction.particles.links.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-move-base@2.12.0/tsparticles.move.base.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-shape-circle@2.12.0/tsparticles.shape.circle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-updater-color@2.12.0/tsparticles.updater.color.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-updater-opacity@2.12.0/tsparticles.updater.opacity.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-updater-size@2.12.0/tsparticles.updater.size.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
     <script>
+      // Initialize Reveal
       Reveal.initialize({
         hash: true,
         transition: 'slide',
         backgroundTransition: 'fade',
-        plugins: [ RevealHighlight ]
+        plugins: [ RevealHighlight ],
+        autoAnimateEasing: 'ease-out',
+        autoAnimateDuration: 0.8,
+        autoAnimateUnmatched: false
+      });
+
+      // Initialize Particles
+      tsParticles.load("tsparticles", {
+        fpsLimit: 60,
+        interactivity: {
+          events: {
+            onHover: {
+              enable: true,
+              mode: "grab",
+            },
+          },
+          modes: {
+            grab: {
+              distance: 140,
+              links: {
+                opacity: 0.5,
+              },
+            },
+          },
+        },
+        particles: {
+          color: {
+            value: ["#06b6d4", "#a855f7", "#ffffff"],
+          },
+          links: {
+            color: "#ffffff",
+            distance: 150,
+            enable: true,
+            opacity: 0.1,
+            width: 1,
+          },
+          move: {
+            direction: "none",
+            enable: true,
+            outModes: {
+              default: "bounce",
+            },
+            random: false,
+            speed: 1,
+            straight: false,
+          },
+          number: {
+            density: {
+              enable: true,
+              area: 800,
+            },
+            value: 80,
+          },
+          opacity: {
+            value: 0.3,
+          },
+          shape: {
+            type: "circle",
+          },
+          size: {
+            value: { min: 1, max: 3 },
+          },
+        },
+        detectRetina: true,
       });
     </script>
   </body>
