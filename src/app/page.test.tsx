@@ -92,4 +92,12 @@ describe('Page', () => {
       expect(screen.queryByText(/ANALYZING/i)).not.toBeInTheDocument();
     });
   });
+
+  it('handles TEST WALLET button click', () => {
+    render(<Page />);
+    const testButton = screen.getByRole('button', { name: /TEST WALLET/i });
+    fireEvent.click(testButton);
+    const input = screen.getByPlaceholderText('Enter wallet address...');
+    expect(input).toHaveValue('7o1kM4ZkLHKoBxCg6ZtWjE2nN3zE6W18');
+  });
 });
