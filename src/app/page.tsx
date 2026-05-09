@@ -77,7 +77,7 @@ export default function Home() {
           <div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-[1.1]">
               Discover your <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 filter drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]">on-chain</span> <br/>
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-purple-500 to-pink-500 filter drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]">on-chain</span> <br/>
               persona.
             </h1>
             <p className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed max-w-lg">
@@ -103,7 +103,7 @@ export default function Home() {
                 className={`flex-1 py-4 sm:py-5 rounded-2xl font-bold tracking-widest text-sm transition-all ${
                   loading || !wallet
                     ? 'bg-slate-800/50 text-slate-500 cursor-not-allowed border border-slate-800'
-                    : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:-translate-y-1'
+                    : 'bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] hover:-translate-y-1'
                 }`}
               >
                 {loading ? 'ANALYZING ON DUNE...' : 'GENERATE WRAPPED'}
