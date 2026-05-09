@@ -6,7 +6,6 @@
   <br/>
   
   [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://trewrap.edycu.dev)
-  [![Pitch Video](https://img.shields.io/badge/Pitch-Video-red.svg)](https://youtube.com/your-video)
   [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg)](https://trewrap.edycu.dev/pitch)
   [![Superteam Frontier](https://img.shields.io/badge/Superteam-Frontier_Hackathon-1E40AF?style=flat&logo=solana&logoColor=white)](https://superteam.fun/earn/listing/dune-analytics-x-superteam-earn-or-frontier-data-sidetrack)
 
@@ -17,7 +16,6 @@
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
   ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)
   ![Dune SIM](https://img.shields.io/badge/Dune_SIM-000000?style=flat&logo=dune&logoColor=white)
-  ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat&logo=openai&logoColor=white)
   ![Vitest](https://img.shields.io/badge/Vitest-FCC72B?style=flat&logo=vitest&logoColor=white)
 </div>
 
@@ -48,7 +46,7 @@ While on-chain data is public, it's often too technical and dry for average user
 | **Styling** | Tailwind CSS v4 | High-performance responsive UI |
 | **Language** | TypeScript | Strict type safety across the stack |
 | **Data Source** | Dune SIM API | Real-time SVM balances & transactions via `api.sim.dune.com` |
-| **AI Engine** | OpenAI | Generates custom personas and roasts based on Dune signals |
+| **AI Engine** | Algorithmic | Rule-based persona classifier driven by on-chain behavioral signals |
 | **Testing** | Vitest | Comprehensive unit and component testing |
 
 For a detailed breakdown of our system architecture and data flow, please refer to the [Architecture Document](docs/ARCHITECTURE.md).

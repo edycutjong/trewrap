@@ -103,7 +103,7 @@ describe('Page', () => {
     const testButton = screen.getByRole('button', { name: /TEST WALLET/i });
     fireEvent.click(testButton);
     const input = screen.getByPlaceholderText('Enter wallet address...');
-    expect(input).toHaveValue('7o1kM4ZkLHKoBxCg6ZtWjE2nN3zE6W18');
+    expect(input).toHaveValue('vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg');
   });
 
   it('handles Download button click successfully', async () => {

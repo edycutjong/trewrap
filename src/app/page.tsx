@@ -81,7 +81,7 @@ export default function Home() {
               persona.
             </h1>
             <p className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed max-w-lg">
-              We analyze your behavioral signals using Dune SQL to roast your crypto trading habits.
+              We analyze your behavioral signals using Dune SIM to roast your crypto trading habits.
             </p>
           </div>
 
@@ -110,7 +110,7 @@ export default function Home() {
               </button>
               <button
                 type="button"
-                onClick={() => setWallet('7o1kM4ZkLHKoBxCg6ZtWjE2nN3zE6W18')}
+                onClick={() => setWallet('vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg')}
                 className="px-6 sm:px-8 py-4 sm:py-5 rounded-2xl font-bold tracking-widest text-sm transition-all bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-slate-700 hover:-translate-y-1"
               >
                 TEST WALLET
