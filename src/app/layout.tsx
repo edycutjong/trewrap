@@ -48,7 +48,7 @@ export default function RootLayout({
       style={{ colorScheme: "dark" }}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">{children}</body>
+      <body suppressHydrationWarning className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">{children}</body>
     </html>
   );
 }

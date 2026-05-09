@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { POST } from './route';
 import { duneClient } from '@/lib/dune-client';
 import { aiPersonaGenerator } from '@/lib/ai-persona';
+import type { BehavioralSignals } from '@/lib/dune-client';
 
 vi.mock('@/lib/dune-client', () => ({
   duneClient: {
@@ -34,18 +35,19 @@ describe('Analyze API Route', () => {
   });
 
   it('returns persona data successfully', async () => {
-    const mockSignals = {
-      tradingVolume: 'High',
-      avgHoldingTime: '4 Minutes',
-      favoriteDex: 'Raydium',
-      winRate: '12.4%',
-      topTradedToken: '$WIF',
-      totalPnl: '-$4,250'
+    const mockSignals: BehavioralSignals = {
+      portfolioValueUsd: 847.32,
+      solBalance: '2.41',
+      tokenCount: 14,
+      topToken: 'dogwifhat',
+      topTokenSymbol: '$WIF',
+      txCount: 312,
+      recentActivity: 'Today',
     };
     vi.mocked(duneClient.fetchBehavioralSignals).mockResolvedValue(mockSignals);
     vi.mocked(aiPersonaGenerator.generate).mockReturnValue({
-      persona: 'Chad',
-      description: 'You are a Chad.'
+      persona: 'Exit Liquidity Human',
+      description: 'You are exit liquidity.'
     });
 
     const req = new Request('http://localhost/api/analyze', {
@@ -57,8 +59,8 @@ describe('Analyze API Route', () => {
     const data = await response.json();
 
     expect(response.status).toBe(200);
-    expect(data.persona).toBe('Chad');
-    expect(data.description).toBe('You are a Chad.');
+    expect(data.persona).toBe('Exit Liquidity Human');
+    expect(data.description).toBe('You are exit liquidity.');
     expect(data.stats).toEqual(mockSignals);
   });
 

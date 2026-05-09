@@ -1,22 +1,47 @@
-export class AIPersonaGenerator {
-  generate(signals: Record<string, string | number>) {
-    console.log("[AIPersonaGenerator] Mapping signals to persona...");
-    
-    // Simulate AI parsing rules
-    let persona = "Exit Liquidity Human";
-    let description = `You traded heavily. Your average hold time was ${signals.avgHoldingTime}. Your bags are heavy, knees weak, arms are heavy.`;
+import type { BehavioralSignals } from './dune-client';
 
-    if (signals.winRate && parseFloat(String(signals.winRate)) > 50) {
-      persona = "Diamond Hands";
-      description = `With a win rate of ${signals.winRate}, you know when to hold 'em. You navigate the trenches with diamond resolve.`;
-    } else if (signals.avgHoldingTime && String(signals.avgHoldingTime).includes("Seconds")) {
-      persona = "Ape Extraordinaire";
-      description = `Holding time: ${signals.avgHoldingTime}. You buy high, sell low, and do it faster than anyone else on ${signals.favoriteDex}.`;
+export class AIPersonaGenerator {
+  generate(signals: BehavioralSignals) {
+    console.log("[AIPersonaGenerator] Mapping SIM signals to persona...");
+
+    const { portfolioValueUsd, tokenCount, txCount, topTokenSymbol, solBalance } = signals;
+
+    // Ghost Wallet — no activity at all
+    if (txCount === 0 || portfolioValueUsd === 0) {
+      return {
+        persona: "Ghost Wallet",
+        description: `This wallet is a phantom. ${txCount === 0 ? "Zero transactions." : `Portfolio value: $${portfolioValueUsd.toFixed(2)}.`} Nothing to see here — maybe a burner, maybe a forgotten seed phrase.`,
+      };
     }
 
+    // Diamond Hands — high value, focused portfolio
+    if (portfolioValueUsd > 10000 && tokenCount < 5) {
+      return {
+        persona: "Diamond Hands",
+        description: `Portfolio: $${portfolioValueUsd.toLocaleString()}. Only ${tokenCount} tokens. ${solBalance} SOL stacked. You picked your bets and you're riding them to Valhalla or zero.`,
+      };
+    }
+
+    // Degen Ape — high activity, many tokens
+    if (txCount > 30 && tokenCount > 20) {
+      return {
+        persona: "Degen Ape",
+        description: `${txCount} transactions. ${tokenCount} different tokens. Top bag: ${topTokenSymbol}. You ape into everything that moves — no DYOR, just vibes and copium.`,
+      };
+    }
+
+    // Paper Hands — lots of tokens but low value (sold everything)
+    if (tokenCount > 10 && portfolioValueUsd < 100) {
+      return {
+        persona: "Paper Hands",
+        description: `${tokenCount} tokens but only $${portfolioValueUsd.toFixed(2)} left. You bought the top and panic sold the bottom on every single one. Classic.`,
+      };
+    }
+
+    // Default fallback — Exit Liquidity Human
     return {
-      persona,
-      description
+      persona: "Exit Liquidity Human",
+      description: `Portfolio: $${portfolioValueUsd.toFixed(2)}. ${txCount} transactions. Top token: ${topTokenSymbol}. You traded heavily and provided exit liquidity to smarter wallets. Thank you for your service.`,
     };
   }
 }

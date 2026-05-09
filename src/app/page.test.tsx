@@ -1,8 +1,13 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import * as htmlToImage from 'html-to-image';
 import Page from './page';
 
 global.fetch = vi.fn();
+
+vi.mock('html-to-image', () => ({
+  toPng: vi.fn(),
+}));
 
 describe('Page', () => {
   beforeEach(() => {
@@ -99,5 +104,90 @@ describe('Page', () => {
     fireEvent.click(testButton);
     const input = screen.getByPlaceholderText('Enter wallet address...');
     expect(input).toHaveValue('7o1kM4ZkLHKoBxCg6ZtWjE2nN3zE6W18');
+  });
+
+  it('handles Download button click successfully', async () => {
+    vi.mocked(global.fetch).mockImplementationOnce(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({ persona: 'Test', description: 'Test', stats: {} })
+    } as Response));
+
+    vi.mocked(htmlToImage.toPng).mockResolvedValue('data:image/png;base64,AAAA');
+
+    render(<Page />);
+    const input = screen.getByPlaceholderText('Enter wallet address...');
+    fireEvent.change(input, { target: { value: 'wallet123' } });
+    fireEvent.click(screen.getByRole('button', { name: /GENERATE WRAPPED/i }));
+
+    await waitFor(() => expect(screen.getByText('Download')).toBeInTheDocument());
+
+    // Spy on createElement AFTER render so React isn't broken
+    const clickMock = vi.fn();
+    const origCreate = document.createElement.bind(document);
+    vi.spyOn(document, 'createElement').mockImplementation((tag: string) => {
+      if (tag === 'a') {
+        return { href: '', download: '', click: clickMock } as unknown as HTMLAnchorElement;
+      }
+      return origCreate(tag);
+    });
+
+    fireEvent.click(screen.getByText('Download'));
+
+    await waitFor(() => {
+      expect(htmlToImage.toPng).toHaveBeenCalled();
+      expect(clickMock).toHaveBeenCalled();
+    });
+
+    vi.restoreAllMocks();
+  });
+
+  it('handles Download error gracefully', async () => {
+    vi.mocked(global.fetch).mockImplementationOnce(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({ persona: 'Test', description: 'Test', stats: {} })
+    } as Response));
+
+    vi.mocked(htmlToImage.toPng).mockRejectedValue(new Error('Canvas error'));
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    render(<Page />);
+    const input = screen.getByPlaceholderText('Enter wallet address...');
+    fireEvent.change(input, { target: { value: 'wallet123' } });
+    fireEvent.click(screen.getByRole('button', { name: /GENERATE WRAPPED/i }));
+
+    await waitFor(() => expect(screen.getByText('Download')).toBeInTheDocument());
+
+    fireEvent.click(screen.getByText('Download'));
+
+    await waitFor(() => {
+      expect(consoleSpy).toHaveBeenCalledWith('Failed to download image', expect.any(Error));
+    });
+
+    consoleSpy.mockRestore();
+  });
+
+  it('handles Share on X button click', async () => {
+    vi.mocked(global.fetch).mockImplementationOnce(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({ persona: 'Test', description: 'Test', stats: {} })
+    } as Response));
+
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+
+    render(<Page />);
+    const input = screen.getByPlaceholderText('Enter wallet address...');
+    fireEvent.change(input, { target: { value: 'wallet123' } });
+    fireEvent.click(screen.getByRole('button', { name: /GENERATE WRAPPED/i }));
+
+    await waitFor(() => expect(screen.getByText('Share on X')).toBeInTheDocument());
+
+    fireEvent.click(screen.getByText('Share on X'));
+
+    expect(openSpy).toHaveBeenCalledWith(
+      expect.stringContaining('twitter.com/intent/tweet'),
+      '_blank'
+    );
+
+    openSpy.mockRestore();
   });
 });
