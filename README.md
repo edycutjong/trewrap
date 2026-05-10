@@ -17,7 +17,7 @@
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
   ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)
   ![Dune SIM](https://img.shields.io/badge/Dune_SIM-000000?style=flat&logo=dune&logoColor=white)
-  [![CI](https://github.com/edycutjong/trewrap/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/trewrap/actions/workflows/ci.yml)
+  [![Trewrap CI](https://github.com/edycutjong/trewrap/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/trewrap/actions/workflows/ci.yml)
 </div>
 
 ---
