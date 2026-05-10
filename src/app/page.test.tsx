@@ -41,7 +41,7 @@ describe('Page', () => {
     
     fireEvent.click(button);
     
-    expect(screen.getByRole('button', { name: /ANALYZING ON DUNE/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /ANALYZING/i })).toBeInTheDocument();
     
     await waitFor(() => {
       expect(screen.getByText('Share on X')).toBeInTheDocument();
@@ -119,7 +119,7 @@ describe('Page', () => {
     fireEvent.change(input, { target: { value: 'wallet123' } });
     fireEvent.click(screen.getByRole('button', { name: /GENERATE WRAPPED/i }));
 
-    await waitFor(() => expect(screen.getByText('Download')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('Download Card')).toBeInTheDocument());
 
     // Spy on createElement AFTER render so React isn't broken
     const clickMock = vi.fn();
@@ -131,7 +131,7 @@ describe('Page', () => {
       return origCreate(tag);
     });
 
-    fireEvent.click(screen.getByText('Download'));
+    fireEvent.click(screen.getByText('Download Card'));
 
     await waitFor(() => {
       expect(htmlToImage.toPng).toHaveBeenCalled();
@@ -155,9 +155,9 @@ describe('Page', () => {
     fireEvent.change(input, { target: { value: 'wallet123' } });
     fireEvent.click(screen.getByRole('button', { name: /GENERATE WRAPPED/i }));
 
-    await waitFor(() => expect(screen.getByText('Download')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText('Download Card')).toBeInTheDocument());
 
-    fireEvent.click(screen.getByText('Download'));
+    fireEvent.click(screen.getByText('Download Card'));
 
     await waitFor(() => {
       expect(consoleSpy).toHaveBeenCalledWith('Failed to download image', expect.any(Error));
