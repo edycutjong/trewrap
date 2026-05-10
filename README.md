@@ -5,9 +5,10 @@
   
   <br/>
   
-  [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://trewrap.edycu.dev)
-  [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg)](https://trewrap.edycu.dev/pitch)
-  [![Superteam Frontier](https://img.shields.io/badge/Superteam-Frontier_Hackathon-1E40AF?style=flat&logo=solana&logoColor=white)](https://superteam.fun/earn/listing/dune-analytics-x-superteam-earn-or-frontier-data-sidetrack)
+  [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg?style=for-the-badge)](https://trewrap.edycu.dev)
+  [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg?style=for-the-badge)](https://trewrap.edycu.dev/pitch)
+  [![Pitch Video](https://img.shields.io/badge/Pitch-Video-red.svg?style=for-the-badge)](https://www.youtube.com/watch?v=your-video-id)
+  [![Superteam Frontier](https://img.shields.io/badge/Superteam-Frontier_Hackathon-1E40AF?style=for-the-badge&logo=solana&logoColor=white)](https://superteam.fun/earn/listing/dune-analytics-x-superteam-earn-or-frontier-data-sidetrack)
 
   <br/>
 
@@ -16,7 +17,7 @@
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
   ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)
   ![Dune SIM](https://img.shields.io/badge/Dune_SIM-000000?style=flat&logo=dune&logoColor=white)
-  ![Vitest](https://img.shields.io/badge/Vitest-FCC72B?style=flat&logo=vitest&logoColor=white)
+  [![CI](https://github.com/edycutjong/trewrap/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/trewrap/actions/workflows/ci.yml)
 </div>
 
 ---
